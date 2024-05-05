@@ -3,11 +3,13 @@ import java.util.Random;
 
 
 public class Car {
+    StringBuilder sb = new StringBuilder();
 
     Random random = new Random();
     private final String Name;
-    private int position = 0;
+    private int position;
     static int carCount =0;
+    private String output ="";
 
     public Car(String Name){
         ++carCount;
@@ -21,11 +23,19 @@ public class Car {
             position++;
         }
         return position;
+
     }
 
-    public void showResults(){
-            System.out.println("실행 결과");
-            System.out.println(Name + ": " + position * '-');
+    public String showResults(){
+        if(position >=1){
+            sb.append('-');
+        }
+            return (Name + ": " + sb);
+
+    }
+    public String showWinner(){
+
+        return "최종 우승자 : " + Name;
     }
 
 }

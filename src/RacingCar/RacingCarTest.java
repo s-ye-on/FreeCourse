@@ -16,24 +16,22 @@ public class RacingCarTest {
         st = new StringTokenizer(br.readLine(),",");
 
         List<Car> CarList = new ArrayList<>();
-        for(int i=0; i<st.countTokens(); i++){
+        for(int i=0; i<3; i++){
             CarList.add(new Car(st.nextToken()));
         }
 
         System.out.println("시도할 회수는 몇회인가요?");
         int times = Integer.parseInt(br.readLine());
 
-        for(Car car : CarList){
-            car.move();
-        }
-
-
         System.out.println("실행 결과");
         for(int i=0; i<times; i++){
             for(Car car : CarList){
-
+                car.move();
+                sb.append(car.showResults()).append("\n");
             }
+
             sb.append("\n");
         }
+        System.out.println(sb);
     }
 }
