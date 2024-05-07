@@ -3,39 +3,30 @@ import java.util.Random;
 
 
 public class Car {
-    StringBuilder sb = new StringBuilder();
+    private static final Random random = new Random();
 
-    Random random = new Random();
-    private final String Name;
+    private static final int RANDOM_BOUNDARY = 10;
+    private static final int MOVE_TRIGGER = 4;
+    private static final int START = 1;
+    private static final String ROUND_FINISH_FORMAT = "%s : %s";
+
+    private final String name;
     private int position;
-    static int carCount =0;
-    private String output ="";
 
-    public Car(String Name){
-        ++carCount;
-        this.Name = Name;
+    public Car(String name) {
+        this.name = name;
         position =0;
     }
 
-    public int move(){
-        int command = random.nextInt(10);
-        if(command >= 4){
+    public int move() {
+        if (random.nextInt(RANDOM_BOUNDARY) >= MOVE_TRIGGER) {
             position++;
         }
+
         return position;
-
     }
 
-    public String showResults(){
-        if(position >=1){
-            sb.append('-');
-        }
-            return (Name + ": " + sb);
-
+    public String showResult() {
+        return ROUND_FINISH_FORMAT.formatted(this.name, this.position);
     }
-    public String showWinner(){
-
-        return "최종 우승자 : " + Name;
-    }
-
 }

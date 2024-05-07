@@ -27,7 +27,7 @@ public class RacingCarTest {
         for(int i=0; i<times; i++){
             for(Car car : CarList){
                 car.move();
-                sb.append(car.showResults()).append("\n");
+                sb.append(car.showResult()).append("\n");
             }
 
             sb.append("\n");
