@@ -12,21 +12,35 @@ public class Car {
 
     private final String name;
     private int position;
+    public  String output;
+    public int moveSize;
 
     public Car(String name) {
         this.name = name;
         position =0;
+        output ="";
+        moveSize =0;
     }
 
-    public int move() {
+    public void move() {
+        position =0;
         if (random.nextInt(RANDOM_BOUNDARY) >= MOVE_TRIGGER) {
             position++;
+            output += '-';
+            moveSize++;
         }
-
-        return position;
+    }
+    public int showMoveSize(){
+        return this.moveSize;
+    }
+    public String getCarName(){
+        return this.name;
     }
 
     public String showResult() {
-        return ROUND_FINISH_FORMAT.formatted(this.name, this.position);
+        return ROUND_FINISH_FORMAT.formatted(this.name, this.output);
+    }
+    public void setMoveSize(int moveSize){
+        this.moveSize = moveSize;
     }
 }

@@ -12,6 +12,8 @@ public class RacingCarTest {
         StringTokenizer st;
         StringBuilder sb = new StringBuilder();
 
+        Rule rule = new Rule();
+
         System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
         st = new StringTokenizer(br.readLine(),",");
 
@@ -33,5 +35,6 @@ public class RacingCarTest {
             sb.append("\n");
         }
         System.out.println(sb);
+        rule.showWinner(CarList);
     }
 }
