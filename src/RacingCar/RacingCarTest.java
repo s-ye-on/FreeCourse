@@ -16,9 +16,9 @@ public class RacingCarTest {
 
         System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
         st = new StringTokenizer(br.readLine(),",");
-
+        int carCount = st.countTokens();
         List<Car> CarList = new ArrayList<>();
-        for(int i=0; i<3; i++){
+        for(int i=0; i<carCount; i++){
             CarList.add(new Car(st.nextToken()));
         }
 
@@ -29,7 +29,7 @@ public class RacingCarTest {
         for(int i=0; i<times; i++){
             for(Car car : CarList){
                 car.move();
-                sb.append(car.showResult()).append("\n");
+                sb.append(rule.showResult(car)).append("\n");
             }
 
             sb.append("\n");
