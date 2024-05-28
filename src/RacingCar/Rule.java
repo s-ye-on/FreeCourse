@@ -1,47 +1,31 @@
 package RacingCar;
 
-import java.util.List;
-import java.util.Random;
+//함수만 제공하는 클래스 (유틸리티 클래스)
 public class Rule {
-    StringBuilder sb = new StringBuilder();
-    private static final Random random = new Random();
-    private static final int RANDOM_BOUNDARY = 10;
-    private static final int MOVE_TRIGGER = 4;
-    Car carNo1 = new Car("temperate");
-    Car car;
-    private static final String ROUND_FINISH_FORMAT = "%s : %s";
-    public String showResult(Car car) {
-        return ROUND_FINISH_FORMAT.formatted(car.getCarName(), car.output);
-    }
-    public static boolean moveRule(){
-        boolean trigger = false;
-        if(random.nextInt(RANDOM_BOUNDARY) >= MOVE_TRIGGER){
-            trigger = true;
-        }
-        return trigger;
+    private static final String NAME_OVER_SIZE = "[ERROR] 이름은 5자를 넘어갈 수 없습니다";
+    private static final String MISSING_COMMA = "[ERROR] 자동차의 이름을 입력할 때 반드시 쉼표가 필요합니다";
+    private static final String ROUND_IS_NOT_NATURAL = "[ERROR] 시도 횟수는 자연수여야 합니다";
+    private static final int NAME_MAX_LENGTH = 5;
+    private static final int MIN_ROUND = 1;
+
+    private Rule() { // 유틸리티 클래스 인스턴스화 막기 위해
     }
 
-    public void showWinner(List<Car> list) {
-
-        list.add(carNo1);
-        int first = 0;
-        for(Car car : list){
-            if(car.showMoveSize()>first){
-                carNo1 = car;
-                first = car.showMoveSize();
-            }
+    public static void validateNameLength(String name) {
+        if (name.length() > NAME_MAX_LENGTH) {
+            throw new IllegalArgumentException(NAME_OVER_SIZE);
         }
-        sb.append(carNo1.getCarName());
+    }
 
-        for(int i=0; i<list.size(); i++){
-            Car cowinner = list.get(i);
-            if(carNo1 == cowinner){
-                continue;
-            }
-            if(first == cowinner.moveSize){
-                sb.append(", "+ cowinner.getCarName());
-            }
+    public static void validatePlayersInput(String input) {
+        if (input != null && !input.contains(",")) {
+            throw new IllegalArgumentException(MISSING_COMMA);
         }
-        System.out.println("최종 우승자: " + sb);
+    }
+
+    public static void validateNaturalNumber(int round) {
+        if (round < MIN_ROUND) {
+            throw new IllegalArgumentException(ROUND_IS_NOT_NATURAL);
+        }
     }
 }

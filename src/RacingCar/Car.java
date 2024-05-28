@@ -1,26 +1,39 @@
 package RacingCar;
+
+import java.util.Random;
+
 public class Car {
+    private static final Random random = new Random();
+    private static final String ROUND_FINISH_FORMAT = "%s : %s";
+    private static final int RANDOM_BOUNDARY = 10;
+    private static final int MOVE_TRIGGER = 4;
     private final String name;
-    public  String output;
     public int moveSize;
-    Rule rule;
 
     public Car(String name) {
         this.name = name;
-        output ="";
-        moveSize =0;
+        this.moveSize = 0;
     }
 
     public void move() {
-        if (rule.moveRule()) {
-            output += '-';
+        if (random.nextInt(RANDOM_BOUNDARY) >= MOVE_TRIGGER) {
             moveSize++;
         }
     }
-    public int showMoveSize(){
+
+    public String getMoveResult() {
+        return ROUND_FINISH_FORMAT.formatted(this.name, this.moveSize);
+    }
+
+    public boolean isWinner(int winnerPosition) {
+        return this.moveSize == winnerPosition;
+    }
+
+    public int getMoveSize() {
         return this.moveSize;
     }
-    public String getCarName(){
+
+    public String getName() {
         return this.name;
     }
 }
